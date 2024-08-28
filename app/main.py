@@ -53,7 +53,7 @@ def make_a_trip(self: Customer, fuel_price: int,
  to make a purchase in any shop")
 
 
-def shop_trip():
+def shop_trip() -> None:
     # write your code here
     with open("app/config.json", "r") as json_file:
         data = json.load(json_file)
