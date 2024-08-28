@@ -1,7 +1,7 @@
 import json
-from app/shop.py import Shop
-from app/car.py import Car
-from app/customer.py import Customer
+from app.shop import Shop
+from app.car import Car
+from app.customer import Customer
 import datetime
 from typing import Optional
 
