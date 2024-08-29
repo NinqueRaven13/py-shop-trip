@@ -8,17 +8,17 @@ from typing import Optional
 
 def visit_shop_func(self: Customer, shop: Shop) -> None:
     now = datetime.datetime.now()
-    print(f"Date: {now.strftime('%d/%m/%Y %H:%M:%S')}")
-    print(f"Thanks, {self.name}, for your purchase!")
-    print("You have bought:")
+    print(f"""Date: {now.strftime('%d/%m/%Y %H:%M:%S')}
+Thanks, {self.name}, for your purchase!
+You have bought:""")
     total_cost = 0
-    for product in shop.products.keys():
+    for product in shop.products:
         price_product = self.product_list[product] * shop.products[product]
         total_cost += price_product
         if int(price_product) == price_product:
             price_product = int(price_product)
-        print(f"{self.product_list[product]} {product}s \
-for {price_product} dollars")
+        print(f"{self.product_list[product]} {product}s"
+              f" for {price_product} dollars")
     print(f"Total cost is {total_cost} dollars")
     print("See you again!\n")
     print(f"{self.name} rides home")
@@ -49,8 +49,8 @@ def make_a_trip(self: Customer, fuel_price: int,
         self.money = round(self.money - expenses, 2)
         visit_shop_func(self, visit_shop)
     else:
-        print(f"{self.name} doesn't have enough money\
- to make a purchase in any shop")
+        print(f"{self.name} doesn't have enough money "
+              "to make a purchase in any shop")
 
 
 def shop_trip() -> None:
@@ -67,15 +67,11 @@ def shop_trip() -> None:
                 customer["product_cart"],
                 customer["location"],
                 customer["money"],
-                Car(customer["car"]["brand"],
-                    customer["car"]["fuel_consumption"]),
+                Car(**customer["car"]),
             )
             for customer in customer_list
         ]
-        shop_obj_list = [
-            Shop(shop["name"], shop["location"],
-                 shop["products"]) for shop in shop_list
-        ]
+        shop_obj_list = [Shop(**shop) for shop in shop_list]
         for customer in customer_obj_list:
             shop = make_a_trip(customer, fuel_price, shop_obj_list)
             if shop:
