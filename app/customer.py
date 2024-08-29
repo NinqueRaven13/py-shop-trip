@@ -22,8 +22,10 @@ class Customer:
         return dist(self.location, shop.location)
 
     def make_purchase(self, shop: Shop) -> float:
-        bill = sum([self.product_list[product] * shop.products[product]
-                    for product in self.product_list])
+        bill = sum(
+            self.product_list[product] * shop.products[product]
+            for product in self.product_list
+        )
         return bill
 
     def money_to_reach_shop(self, shop: Shop, fuel_price: float) -> float:
