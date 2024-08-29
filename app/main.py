@@ -8,9 +8,10 @@ from typing import Optional
 
 def visit_shop_func(self: Customer, shop: Shop) -> None:
     now = datetime.datetime.now()
-    print(f"""Date: {now.strftime('%d/%m/%Y %H:%M:%S')}
-Thanks, {self.name}, for your purchase!
-You have bought:""")
+    print(
+        f"Date: {now.strftime('%d/%m/%Y %H:%M:%S')}\n"
+        f"Thanks, {self.name}, for your purchase!\n"
+        "You have bought:")
     total_cost = 0
     for product in shop.products:
         price_product = self.product_list[product] * shop.products[product]
